@@ -1,0 +1,8 @@
+cache_homepage:
+    path:     /cache/hello/{name}
+    defaults: { _controller: CacheBundle:Default:index }
+
+cache_angular_app:
+    resource: "@CacheBundle/Controller/"
+    type:     annotation
+    prefix:   /angular_app

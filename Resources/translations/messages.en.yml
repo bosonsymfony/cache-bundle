@@ -1,0 +1,4 @@
+excepciones:
+    CE02:
+        mensaje: 'An excepction has ocour.'
+        descripcion: 'This is the description.'

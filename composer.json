@@ -1,0 +1,31 @@
+{
+    "name": "boson/cache-bundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "Paquete de Caché de Boson",
+    "authors": [
+        {
+            "name": "Julio Cesar Ocaña Bermudez",
+            "email": "jcocana@uci.cu"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"UCI\\Boson\\CacheBundle": ""}
+    },
+     "minimum-stability": "dev",
+    "target-dir": "UCI/Boson/CacheBundle",
+    "require": {
+        "symfony/symfony": "~2.7.0"
+    },
+    "require-dev": {
+        "php": ">=5.4",
+        "symfony/symfony": "~2.7.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev",
+            "dev-b2.3":   "1.0.x-dev",
+            "dev-b2.7":   "1.1.x-dev"
+        }
+    }
+}

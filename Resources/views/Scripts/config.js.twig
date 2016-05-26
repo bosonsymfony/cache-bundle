@@ -1,0 +1,75 @@
+/**
+ * Created by killer on 19/01/16.
+ */
+
+angular.module('app')
+        .run(
+                ['$rootScope',
+                    function ($rootScope) {
+
+                    }
+                ]
+        )
+        .config(
+                ['$stateProvider',
+                    function ($stateProvider) {
+
+                        //routes here
+                        $stateProvider
+                                .state('cache', {
+                                    abstract: true,
+                                    url: '/cache',
+                                    views: {
+                                        '': {
+                                            templateUrl: '{{ path('backend_layout')|raw }}'
+                                        },
+                                        'aside': {
+                                            templateUrl: '{{ path('backend_aside')|raw }}'
+                                        },
+                                        'content': {
+                                            templateUrl: '{{ path('backend_content')|raw }}'
+                                        }
+                                    }
+                                })
+                                .state('cache.gestionarcache', {
+                                    url: '/gestionarcache',
+                                    templateUrl: '{{ asset('bundles/cache/adminApp/views/gestion_cache.html')|raw }}',
+                                    controller: 'cacheHomeCtrl',
+                                    data: {
+                                        title: 'Gestionar Caché'
+                                    },
+                                    resolve: load(
+                                            [
+                                                {
+                                                    name: 'hljs',
+                                                    files: [
+                                                        '{{ asset('bundles/backend/lib/highlight/highlight.pack.js')|raw }}',
+                                                        '{{ asset('bundles/backend/lib/highlight/styles/androidstudio.css')|raw }}',
+                                                        '{{ asset('bundles/backend/node_modules/angular-highlightjs/build/angular-highlightjs.js')|raw }}'
+                                                    ]
+                                                },
+                                                {
+                                                    files: [
+                                                        '{{ asset('bundles/cache/adminApp/services/cacheHomeSvc.js')|raw }}',
+                                                        '{{ asset('bundles/cache/adminApp/filters/cacheHomeFilter.js')|raw }}',
+                                                        '{{ asset('bundles/cache/adminApp/directives/cacheHomeDirective.js')|raw }}',
+                                                        '{{ asset('bundles/cache/adminApp/controllers/cacheHomeCtrl.js')|raw }}'
+                                                    ]
+                                                }
+                                            ]
+                                    )
+                                });
+
+
+                        function load(src) {
+                            return {
+                                deps: ['$ocLazyLoad',
+                                    function ($ocLazyLoad) {
+                                        return $ocLazyLoad.load(src);
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+        );

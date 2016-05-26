@@ -1,0 +1,64 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>Gestionar Caché</h2>
+        <span flex></span>
+        <md-button ng-click="eraseCacheClick()" class="md-raised md-warn">Limpiar caché</md-button>
+    </div>
+</md-toolbar>
+
+
+<md-content flex layout-padding>
+
+    <p>Configuración de parámetros de caché: </p>
+
+    <form name="confcache">
+        <!-- Select Tipo -->
+        <md-input-container>
+            <label>Tipo *</label>
+            <md-select ng-model="tipo" ng-change="checkVisibility()" ng-change="modif()">
+                <md-option ng-repeat="c in tiposC" ng-bind="c.label"></md-option>
+            </md-select>
+        </md-input-container>
+
+        <!-- Host y Puerto -->
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm ng-show="visHost">
+                <label>Host *</label>
+                <input type="text" name="host" ng-model="anfitrion" ng-change="modif()" ng-pattern="host">
+
+                <div ng-messages="confcache.host.$error">
+                    <div ng-message="pattern">{{hostMess}}</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm ng-show="visPuerto">
+                <label>Puerto *</label>
+                <input ng-model="puerto" name="port" ng-change="modif()" ng-pattern="numeric">
+
+                <div ng-messages="confcache.port.$error">
+                    <div ng-message="pattern">{{numericMess}}</div>
+                </div>
+            </md-input-container>
+        </div>
+        <br/>
+
+        <!-- URL -->
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm ng-show="visUrl">
+                <label>URL *</label>
+                <input ng-model="direccion" name="url" ng-change="modif()" ng-pattern="regexURL">
+
+                <div ng-messages="confcache.url.$error">
+                    <div ng-message="pattern">{{regexURLMess}}</div>
+                </div>
+            </md-input-container>
+        </div>
+
+        <!-- Botones -->
+        <md-button ng-click="guardarClick()"
+                   ng-disabled="!wasmodified || (visHost && !anfitrion) || (visPuerto && !puerto) || (visUrl && !direccion)"
+                   class="md-raised md-primary">Configurar Caché
+        </md-button>
+    </form>
+
+</md-content>

@@ -1,0 +1,12 @@
+config_route: cache_app_config
+menu:
+    cache:
+        title: Caché
+        type: toggle
+        icon: mdi mdi-view-quilt
+        includes: cache
+        children:
+            home:
+                title: Gestionar Caché
+                type: link
+                state: cache.gestionarcache

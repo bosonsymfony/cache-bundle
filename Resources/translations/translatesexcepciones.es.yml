@@ -1,0 +1,7 @@
+excepciones:
+    E605:
+        mensaje: Hola esto esto es una excepción con translator
+        descripcion: Esta es la descripcions de E605
+    CE02:
+        mensaje: mensaje de CE02
+        descripcion: descripcion de  CE02

@@ -1,0 +1,8 @@
+parameters:
+    cache.boson.class: UCI\Boson\CacheBundle\Cache\Cache
+
+services:
+    uci.boson.cache:
+        class: %cache.boson.class%
+        arguments: ["%cache%"]
+

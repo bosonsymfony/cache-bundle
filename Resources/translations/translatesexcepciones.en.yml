@@ -1,0 +1,8 @@
+excepciones:
+    E605:
+        mensaje: Hello this is a message exception traslated with translator
+        descripcion: dasdasdasds
+
+    CE02:
+        mensaje: CE02 Hello this is a message exception traslated with translator
+        descripcion: CE02 dasdasdasds
