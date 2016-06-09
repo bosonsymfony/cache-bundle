@@ -36,7 +36,9 @@ class ConfigController extends BackendController
     public function readYAMLAction()
     {
         $yaml = new Parser();
-        $values = $yaml->parse(file_get_contents('/var/www/html/bosonwithsandbox-tesis/app/config/parameters_boson.yml')); //esto hay q cambiarlo por ruta relativa o por busqueda recursiva
+        $url = $this->getParameter('kernel.root_dir').DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'parameters_boson.yml';
+
+        $values = $yaml->parse(file_get_contents($url)); //esto hay q cambiarlo por ruta relativa o por busqueda recursiva
         return $values;
     }
 
