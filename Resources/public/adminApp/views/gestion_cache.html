@@ -2,7 +2,7 @@
     <div class="md-toolbar-tools">
         <h2>Gestionar caché</h2>
         <span flex></span>
-        <md-button ng-click="eraseCacheClick()" class="md-raised md-warn">Limpiar caché</md-button>
+        <md-button style="text-transform: none" ng-click="eraseCacheClick()" class="md-raised md-warn">Limpiar caché</md-button>
     </div>
 </md-toolbar>
 
@@ -56,6 +56,7 @@
 
         <!-- Botones -->
         <md-button ng-click="guardarClick()"
+                   style="text-transform: none"
                    ng-disabled="!wasmodified || (visHost && !anfitrion) || (visPuerto && !puerto) || (visUrl && !direccion)"
                    class="md-raised md-primary">Configurar caché
         </md-button>

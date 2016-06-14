@@ -10,12 +10,12 @@ angular.module('app')
                 $scope.alphanumeric = '[a-zA-Z0-9]+';
                 $scope.host = '[a-zA-Z0-9.]+';
                 $scope.numeric = '[0-9]+';
-                $scope.regexURL = '[a-zA-Z0-9.:/]+';
+                $scope.regexURL = '[a-zA-Z0-9.:/_]+';
                 $scope.alphanumericMess = "Solo se permiten letras y números.";
                 $scope.numericMess= "Solo se permiten números.";
-                $scope.regexURLMess = "Solo se permiten letras, números y caracteres especiales . : /.";
+                $scope.regexURLMess = "Solo se permiten letras, números y caracteres especiales . : / _.";
                 $scope.hostMess = "Solo se permiten letras, números y caracter especial '.' .";
-
+                var first_access = null;
 
                 $scope.wasmodified = false;
                 $scope.modif = function () {
@@ -39,6 +39,12 @@ angular.module('app')
                     $scope.visHost = true;
                     $scope.visPuerto = true;
                     $scope.visUrl = true;
+
+                    if(first_access){
+                        first_access = false;
+                    }else {
+                        $scope.wasmodified = true;
+                    }
 
                     switch ($scope.tipo) {
                         case "apc_cache":
@@ -128,6 +134,7 @@ angular.module('app')
                                 $scope.direccion = response.url;
                                 break;
                         }
+                        first_access = true;
                         $scope.checkVisibility();
                     });
 
@@ -154,6 +161,7 @@ angular.module('app')
                             .success(function (response) {
                                 toastr.success("La caché se ha configurado satisfactoriamente");
                                 $scope.wasmodified = false;
+                                first_access = null;
                             })
                             .error(function (response) {
                                 console.log(response);
@@ -172,7 +180,8 @@ angular.module('app')
                         })
                         .error(function (response) {
                             console.log(response);
-                            toastr.error("Error al limpiar la caché");
+                            toastr.error("Error al limpiar la caché. El tipo de caché seleccionado" +
+                                " no se encuentra correctamente instalado y/o configurado en el servidor");
                         });
                 };
 
