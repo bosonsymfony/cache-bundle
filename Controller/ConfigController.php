@@ -28,6 +28,18 @@ class ConfigController extends BackendController
         $response = new JsonResponse($arr);
         return $response;
     }
+    /**
+     * Obtiene el token para que los formularios de angular trabajen.
+     *
+     * @Route("/cache/csrf_token", name="cache_csrf_form", options={"expose"=true})
+     * @Method("POST")
+     */
+    public function getCsrfTokenAction(Request $request){
+        $tokenId = $request->request->get('id_form');
+        $csrf = $this->get('security.csrf.token_manager');
+        $token = $csrf->getToken($tokenId);
+        return new Response($token);
+    }
 
     /**
      * Lee la configuración de la caché en el fichero parameters_boson.yml
@@ -38,7 +50,7 @@ class ConfigController extends BackendController
         $yaml = new Parser();
         $url = $this->getParameter('kernel.root_dir').DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'parameters_boson.yml';
 
-        $values = $yaml->parse(file_get_contents($url)); //esto hay q cambiarlo por ruta relativa o por busqueda recursiva
+        $values = $yaml->parse(file_get_contents($url));
         return $values;
     }
 
@@ -50,8 +62,14 @@ class ConfigController extends BackendController
      */
     public function eraseCacheAction()
     {
-        $this->get('uci.boson.cache')->deleteAll();
-        return new Response();
+        $cache = $this->get('uci.boson.cache')->deleteAll();
+
+        if($cache){
+            return new Response("La caché se ha limpiado satisfactoriamente.",200);
+        }else{
+            return new Response("Error al limpiar la caché. El tipo de caché seleccionado no se encuentra correctamente
+            instalado y/o configurado en el servidor.", 500);
+        }
     }
 
     /**
@@ -112,10 +130,9 @@ class ConfigController extends BackendController
                 $yaml['parameters']['cache']['url'] = $data->getUrl();
             }
             $yaml_dump = $dumper->dump($yaml, 3);
-            file_put_contents('/var/www/html/bosonwithsandbox-tesis/app/config/parameters_boson.yml', $yaml_dump);
-            return new Response();
+            $url = $this->getParameter('kernel.root_dir').DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'parameters_boson.yml';
+            file_put_contents($url, $yaml_dump);
+            return new Response("La caché se ha configurado satisfactoriamente.",200);
         }
-
-
     }
 }

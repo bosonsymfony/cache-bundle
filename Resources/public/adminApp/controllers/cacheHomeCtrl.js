@@ -5,7 +5,12 @@ angular.module('app')
     .controller('cacheHomeCtrl',
         ['$scope', 'cacheHomeSvc', 'toastr', '$mdDialog',
             function ($scope, cacheHomeSvc, toastr, $mdDialog) {
-                $scope.confirmacion = false;
+                cacheHomeSvc.getCSRFtoken()
+                    .success(function (response) {
+                         $scope.token = response;
+                    })
+                    .error(function (response) {
+                    });
 
                 $scope.alphanumeric = '[a-zA-Z0-9]+';
                 $scope.host = '[a-zA-Z0-9.]+';
@@ -154,12 +159,13 @@ angular.module('app')
                                 type: $scope.tipo,
                                 host: $scope.anfitrion,
                                 port: $scope.puerto,
-                                url: $scope.direccion
+                                url: $scope.direccion,
+                                _token: $scope.token
                             }
                         };
                         cacheHomeSvc.writeYAML(data)
                             .success(function (response) {
-                                toastr.success("La caché se ha configurado satisfactoriamente");
+                                toastr.success(response);
                                 $scope.wasmodified = false;
                                 first_access = null;
                             })
@@ -169,19 +175,17 @@ angular.module('app')
                             });
                     }, function() {
                         //en caso contrario:
-                        toastr.info("Se ha cancelado la operación");
+                        //toastr.info("Se ha cancelado la operación");
                     });
                 };
 
                 $scope.eraseCacheClick = function () {
                     cacheHomeSvc.eraseCache()
                         .success(function (response) {
-                            toastr.success("La caché se ha limpiado satisfactoriamente");
+                            toastr.success(response);
                         })
                         .error(function (response) {
-                            console.log(response);
-                            toastr.error("Error al limpiar la caché. El tipo de caché seleccionado" +
-                                " no se encuentra correctamente instalado y/o configurado en el servidor");
+                            toastr.error("Error al limpiar la caché. El tipo de caché seleccionado no se encuentra correctamente instalado y/o configurado en el servidor.");
                         });
                 };
 

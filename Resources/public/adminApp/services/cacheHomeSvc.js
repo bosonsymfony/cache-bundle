@@ -26,9 +26,9 @@ angular.module('app')
                     return $http.get(Routing.generate('cache_erase', {}, true));
                 }
 
-                //function eraseCache() {
-                //    return $http.get(Routing.generate('backend_cache_clear', {}, true));
-                //}
+                function getCSRFtoken() {
+                    return $http.post(Routing.generate('cache_csrf_form', {}, true), {id_form: 'uci_boson_cachebundle_data'});
+                }
 
                 return {
                     setMessage: setMessage,
@@ -36,6 +36,7 @@ angular.module('app')
                     writeYAML: writeYAML,
                     showCurrentInfo: showCurrentInfo,
                     eraseCache: eraseCache,
+                    getCSRFtoken: getCSRFtoken,
                     $get: function () {
                     }
                 }

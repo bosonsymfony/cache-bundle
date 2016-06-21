@@ -7,6 +7,6 @@ menu:
         includes: cache
         children:
             home:
-                title: Gestionar Caché
+                title: Gestionar caché
                 type: link
                 state: cache.gestionarcache
