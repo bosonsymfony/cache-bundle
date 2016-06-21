@@ -7,7 +7,7 @@ angular.module('app')
             function ($scope, cacheHomeSvc, toastr, $mdDialog) {
                 cacheHomeSvc.getCSRFtoken()
                     .success(function (response) {
-                         $scope.token = response;
+                        $scope.token = response;
                     })
                     .error(function (response) {
                     });
@@ -17,7 +17,7 @@ angular.module('app')
                 $scope.numeric = '[0-9]+';
                 $scope.regexURL = '[a-zA-Z0-9.:/_]+';
                 $scope.alphanumericMess = "Solo se permiten letras y números.";
-                $scope.numericMess= "Solo se permiten números.";
+                $scope.numericMess = "Solo se permiten números.";
                 $scope.regexURLMess = "Solo se permiten letras, números y caracteres especiales . : / _.";
                 $scope.hostMess = "Solo se permiten letras, números y caracter especial '.' .";
                 var first_access = null;
@@ -45,9 +45,9 @@ angular.module('app')
                     $scope.visPuerto = true;
                     $scope.visUrl = true;
 
-                    if(first_access){
+                    if (first_access) {
                         first_access = false;
-                    }else {
+                    } else {
                         $scope.wasmodified = true;
                     }
 
@@ -146,36 +146,40 @@ angular.module('app')
 
                 $scope.guardarClick = function (ev) {
 
-                    var confirm = $mdDialog.confirm()
-                        .title('Confirmación de cambios')
-                        .textContent('¿Está seguro que desea aplicar los cambios?')
-                        .targetEvent(ev)
-                        .ok('Si')
-                        .cancel('No');
-                    $mdDialog.show(confirm).then(function() {
-                        //si se selecciona que si:
-                        var data = {
-                            uci_boson_cachebundle_data: {
-                                type: $scope.tipo,
-                                host: $scope.anfitrion,
-                                port: $scope.puerto,
-                                url: $scope.direccion,
-                                _token: $scope.token
-                            }
-                        };
-                        cacheHomeSvc.writeYAML(data)
-                            .success(function (response) {
-                                toastr.success(response);
-                                $scope.wasmodified = false;
-                                first_access = null;
-                            })
-                            .error(function (response) {
-                                console.log(response);
-                                toastr.error(response);
-                            });
-                    }, function() {
-                        //en caso contrario:
-                        //toastr.info("Se ha cancelado la operación");
+                    $mdDialog.show({
+                        clickOutsideToClose: true,
+                        controller: 'DialogController',
+                        focusOnOpen: false,
+                        targetEvent: ev,
+                        locals: {
+                            entities: $scope.selected
+                        },
+                        templateUrl: $scope.$urlAssets + 'bundles/cache/adminApp/views/confirm-dialog.html'
+                    }).then(function (answer) {
+                        //console.log(answer);
+                        if (answer == 'Aceptar') {
+                            var data = {
+                                uci_boson_cachebundle_data: {
+                                    type: $scope.tipo,
+                                    host: $scope.anfitrion,
+                                    port: $scope.puerto,
+                                    url: $scope.direccion,
+                                    _token: $scope.token
+                                }
+                            };
+                            cacheHomeSvc.writeYAML(data)
+                                .success(function (response) {
+                                    toastr.success(response);
+                                    $scope.wasmodified = false;
+                                    first_access = null;
+                                })
+                                .error(function (response) {
+                                    console.log(response);
+                                    toastr.error(response);
+                                });
+                        } else {
+                            // alert("Cancelar");
+                        }
                     });
                 };
 
@@ -189,6 +193,24 @@ angular.module('app')
                         });
                 };
 
+                //$scope.cancelar = function () {
+                //    $mdDialog.cancel;
+                //};
+            }
+        ]
+    )
+    .controller('DialogController',
+        ['$scope', 'cacheHomeSvc', 'toastr', '$mdDialog',
+            function ($scope, cacheHomeSvc, toastr, $mdDialog) {
+                $scope.hide = function () {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function () {
+                    $mdDialog.cancel();
+                };
+                $scope.answer = function (answer) {
+                    $mdDialog.hide(answer);
+                };
 
             }
         ]
