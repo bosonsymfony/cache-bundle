@@ -328,6 +328,18 @@ Componente: CacheBundle
 
             void
 
+4.3. Configuración del componente a través de la interfaz gráfica
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Para la configuración de la caché es necesario acceder al módulo dentro del panel de configuración. Una vez en el módulo se presentan las opciones básicas de configuración de caché, cargando la configuración actual.
+
+4.3.1. Configuración de parámetros del componente
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Para establecer nuevos parámetros de configuración es necesario especificar el Tipo de caché que se va a utilizar en la aplicación. En dependencia de este tipo serán mostrados nuevos campos para especificar la configuración. Para almacenar los cambios realizados se presiona el botón Configurar, el cual se mostrará deshabilitado hasta el momento en que algunos de los campos presentados sufran algún cambio. Una vez presionado el botón se muestra un mensaje de confirmación para realizar los cambios. Al seleccionar que se desean guardar los cambios, el sistema procesa la petición y muestra un mensaje indicando el éxito de la operación a través del mensaje “La caché se ha configurado satisfactoriamente”.
+
+4.3.2. Limpiar caché
+^^^^^^^^^^^^^^^^^^^^
+Para limpiar la caché se presenta el botón Limpiar en la esquina superior derecha de la pantalla. Esta opción limpia la caché en dependencia del tipo seleccionado en la configuración. Una vez presionado el botón el sistema procesa la petición y muestra al usuario un mensaje indicando el éxito o fallo de la operación.
+
 ---------------------------------------------
 
 :Versión: 1.0 17/7/2015
