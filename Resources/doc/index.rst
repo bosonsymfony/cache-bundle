@@ -343,7 +343,7 @@ Para limpiar la caché se presenta el botón Limpiar en la esquina superior dere
 ---------------------------------------------
 
 :Versión: 1.0 17/7/2015
-:Autores: Julio Cesar Ocaña Bermúdez jcocana@uci.cu
+:Autores: Julio Cesar Ocaña Bermúdez jcocana@uci.cu,
           Daniel Herrera Sánchez dherrera@estudiantes.uci.cu
 
 Contribuidores
