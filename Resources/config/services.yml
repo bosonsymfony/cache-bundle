@@ -3,6 +3,6 @@ parameters:
 
 services:
     uci.boson.cache:
-        class: %cache.boson.class%
+        class: "%cache.boson.class%"
         arguments: ["%cache%"]
 
