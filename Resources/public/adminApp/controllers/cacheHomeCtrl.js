@@ -22,9 +22,21 @@ angular.module('app')
                 $scope.hostMess = "Solo se permiten letras, números y caracter especial '.' .";
                 var first_access = null;
 
+                var ruta_orig = null;
+                var host_orig = null;
+                var port_orig = null;
+
                 $scope.wasmodified = false;
+
                 $scope.modif = function () {
-                    $scope.wasmodified = true;
+                    if (ruta_orig != $scope.direccion ||
+                        host_orig != $scope.anfitrion ||
+                        port_orig != $scope.puerto){
+
+                        $scope.wasmodified = true;
+                    }else{
+                        $scope.wasmodified = false;
+                    }
                 };
 
                 $scope.tiposC = [
@@ -110,16 +122,22 @@ angular.module('app')
                                 $scope.tipo = response.type;
                                 $scope.anfitrion = response.host;
                                 $scope.puerto = response.port;
+                                host_orig = response.host;
+                                port_orig = response.port;
                                 break;
                             case "memcached_cache":
                                 $scope.tipo = response.type;
                                 $scope.anfitrion = response.host;
                                 $scope.puerto = response.port;
+                                host_orig = response.host;
+                                port_orig = response.port;
                                 break;
                             case "redis_cache":
                                 $scope.tipo = response.type;
                                 $scope.anfitrion = response.host;
                                 $scope.puerto = response.port;
+                                host_orig = response.host;
+                                port_orig = response.port;
                                 break;
                             case "win_cache_cache":
                                 $scope.tipo = response.type;
@@ -133,10 +151,12 @@ angular.module('app')
                             case "file_system_cache":
                                 $scope.tipo = response.type;
                                 $scope.direccion = response.url;
+                                ruta_orig = response.url;
                                 break;
                             case "php_file_cache":
                                 $scope.tipo = response.type;
                                 $scope.direccion = response.url;
+                                ruta_orig = response.url;
                                 break;
                         }
                         first_access = true;
@@ -172,6 +192,61 @@ angular.module('app')
                                     toastr.success(response);
                                     $scope.wasmodified = false;
                                     first_access = null;
+
+                                    cacheHomeSvc.showCurrentInfo()
+                                        .success(function (response) {
+                                            switch (response.type) {
+                                                case "apc_cache":
+                                                    $scope.tipo = response.type;
+                                                    break;
+                                                case "array_cache":
+                                                    $scope.tipo = response.type;
+                                                    break;
+                                                case "memcache_cache":
+                                                    $scope.tipo = response.type;
+                                                    $scope.anfitrion = response.host;
+                                                    $scope.puerto = response.port;
+                                                    host_orig = response.host;
+                                                    port_orig = response.port;
+                                                    break;
+                                                case "memcached_cache":
+                                                    $scope.tipo = response.type;
+                                                    $scope.anfitrion = response.host;
+                                                    $scope.puerto = response.port;
+                                                    host_orig = response.host;
+                                                    port_orig = response.port;
+                                                    break;
+                                                case "redis_cache":
+                                                    $scope.tipo = response.type;
+                                                    $scope.anfitrion = response.host;
+                                                    $scope.puerto = response.port;
+                                                    host_orig = response.host;
+                                                    port_orig = response.port;
+                                                    break;
+                                                case "win_cache_cache":
+                                                    $scope.tipo = response.type;
+                                                    break;
+                                                case "xcache_cache":
+                                                    $scope.tipo = response.type;
+                                                    break;
+                                                case "zend_data_cache":
+                                                    $scope.tipo = response.type;
+                                                    break;
+                                                case "file_system_cache":
+                                                    $scope.tipo = response.type;
+                                                    $scope.direccion = response.url;
+                                                    ruta_orig = response.url;
+                                                    break;
+                                                case "php_file_cache":
+                                                    $scope.tipo = response.type;
+                                                    $scope.direccion = response.url;
+                                                    ruta_orig = response.url;
+                                                    break;
+                                            }
+                                            first_access = true;
+                                            $scope.checkVisibility();
+                                        });
+
                                 })
                                 .error(function (response) {
                                     console.log(response);
