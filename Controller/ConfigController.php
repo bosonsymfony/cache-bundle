@@ -94,20 +94,7 @@ class ConfigController extends BackendController
         $token = $csrf->getToken($tokenId);
         return new Response($token);
     }
-
-//    /**
-//     * Lee la configuración de la caché en el fichero parameters_boson.yml
-//     * @return mixed
-//     */
-//    public function readYAMLAction()
-//    {
-//        $yaml = new Parser();
-//        $url = $this->getParameter('kernel.root_dir') . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'parameters_boson.yml';
-//
-//        $values = $yaml->parse(file_get_contents($url));
-//        return $values;
-//    }
-
+    
     /**
      * Utiliza los servicios de caché para eliminar el contenido de la misma
      * Responde al RF(78) Limpiar la caché
