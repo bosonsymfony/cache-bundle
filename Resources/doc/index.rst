@@ -57,7 +57,7 @@ Componente: CacheBundle
                );
            }
 
-    4. Añadir dentro de *parameters* en el archivo `app/config/parameters.yml` la siguiente línea:
+    4. Añadir en el archivo `app/config/parameters.yml` la siguiente línea:
 
         **cache {type: tipo de caché, parámetros separados por coma}**
 
@@ -334,7 +334,7 @@ Para la configuración de la caché es necesario acceder al módulo dentro del p
 
 4.3.1. Configuración de parámetros del componente
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Para establecer nuevos parámetros de configuración es necesario especificar el Tipo de caché que se va a utilizar en la aplicación. En dependencia de este tipo serán mostrados nuevos campos para especificar la configuración. Para almacenar los cambios realizados se presiona el botón Configurar, el cual se mostrará deshabilitado hasta el momento en que algunos de los campos presentados sufran algún cambio. Una vez presionado el botón se muestra un mensaje de confirmación para realizar los cambios. Al seleccionar que se desean guardar los cambios, el sistema procesa la petición y muestra un mensaje indicando el éxito de la operación a través del mensaje “La caché se ha configurado satisfactoriamente”.
+Para establecer nuevos parámetros de configuración es necesario especificar el tipo de caché que se va a utilizar en la aplicación. En dependencia de este tipo serán mostrados nuevos campos para especificar la configuración. Para almacenar los cambios realizados se presiona el botón Configurar, el cual se mostrará deshabilitado hasta el momento en que algunos de los campos presentados sufran algún cambio. Una vez presionado el botón se muestra un mensaje de confirmación para realizar los cambios. Al seleccionar que se desean guardar los cambios, el sistema procesa la petición y muestra un mensaje indicando el éxito de la operación a través del mensaje “La caché se ha configurado satisfactoriamente”.
 
 4.3.2. Limpiar caché
 ^^^^^^^^^^^^^^^^^^^^
@@ -344,7 +344,7 @@ Para limpiar la caché se presenta el botón Limpiar en la esquina superior dere
 
 :Versión: 1.0 17/7/2015
 :Autores: Julio Cesar Ocaña Bermúdez jcocana@uci.cu,
-          Daniel Herrera Sánchez dherrera@estudiantes.uci.cu
+          Daniel Herrera Sánchez dherrera@uci.cu
 
 Contribuidores
 --------------
