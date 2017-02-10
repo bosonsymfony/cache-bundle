@@ -13,7 +13,7 @@ Componente: CacheBundle
     - Objetos o instancias de clases.
     - Estructuras de datos complejas como listas, pilas, colas, árboles y otras estructuras de mayor complejidad.
 
-2. Prerrequisitos
+2. Prerequisitos
 ------------------
 
     Tener habilitado y configurado cualquiera de los siguientes mecanismos de almacenamiento en caché que se
@@ -31,7 +31,7 @@ Componente: CacheBundle
     - ZendDataCache
 
 3. Instalación
----------------
+---------------------
 
     1. Copiar el componente dentro de la carpeta `vendor/boson/cache-bundle/UCI/Boson`.
     2. Registrarlo en el archivo `app/autoload.php` de la siguiente forma:
